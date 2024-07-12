@@ -15,7 +15,7 @@ services:
     networks:
       - my_network
   app:
-    container_name: yotube-video-sharing
+    container_name: hands-on-auth
     build: .
     environment:
       NODE_ENV: ${NODE_ENV}
