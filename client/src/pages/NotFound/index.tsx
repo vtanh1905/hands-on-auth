@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.scss';
 
-const NotFoundPage = () => {
+const NotFoundPagePage = () => {
   return (
     <div className='not-found-page'>
       Oops! 404 Page Not Found
@@ -9,4 +9,4 @@ const NotFoundPage = () => {
   )
 }
 
-export default NotFoundPage
+export default NotFoundPagePage

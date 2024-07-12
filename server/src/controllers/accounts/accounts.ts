@@ -1,9 +1,10 @@
 import { Router, Request, Response, NextFunction } from 'express'
 
-import { accountValidator } from '../validators'
-import { AccountService } from '../services'
-import { authenticateMiddleware } from '../middlewares'
-import { CustomRequest } from '../common'
+import { accountValidator } from './validators/account'
+import { AccountService } from '../../services'
+import { authenticationMiddleware } from '../../middlewares'
+import { HttpStatusException } from '../../common/exceptions'
+import { CustomRequest } from '../../models'
 
 const accountController: Router = Router()
 
@@ -12,7 +13,7 @@ export const accountGetInfo = async (req: Request, res: Response, next: NextFunc
     const { email } = (req as CustomRequest).user
 
     res.json({
-      message: 'Get Info Successfully',
+      message: 'Success',
       data: await AccountService.getInstance().getUserByEmail(email)
     })
   } catch (error) {
@@ -27,7 +28,7 @@ export const accountRegistry = async (req: Request, res: Response, next: NextFun
     await AccountService.getInstance().registry(email, password)
 
     res.json({
-      message: 'Registry Successfully'
+      message: 'Success'
     })
   } catch (error) {
     next(error)
@@ -39,7 +40,7 @@ export const accountLogin = async (req: Request, res: Response, next: NextFuncti
     const { email, password } = req.body
 
     res.json({
-      message: 'Login Successfully',
+      message: 'Success',
       data: {
         token: await AccountService.getInstance().login(email, password)
       }
@@ -49,7 +50,7 @@ export const accountLogin = async (req: Request, res: Response, next: NextFuncti
   }
 }
 
-accountController.post('/info', authenticateMiddleware, accountGetInfo)
+accountController.post('/info', authenticationMiddleware, accountGetInfo)
 accountController.post('/registry', accountValidator, accountRegistry)
 accountController.post('/login', accountValidator, accountLogin)
 

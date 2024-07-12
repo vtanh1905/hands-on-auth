@@ -1,21 +1,24 @@
 import React from 'react'
-import { HomePage, RegistryPage, ShareVideoPage, NotFound } from './pages'
+import Home from './pages/Home'
+import Registry from './pages/Registry'
+import NotFound from './pages/NotFound'
+import Dashboard from './pages/Dashboard'
 
 export default [
   {
     path: '/',
-    component: <HomePage />
+    component: <Home />
   },
   {
     path: '/registry',
-    component: <RegistryPage />,
+    component: <Registry />,
     authenticate: {
       mustLogin: false
     }
   },
   {
-    path: '/share-video',
-    component: <ShareVideoPage />,
+    path: '/dashboard',
+    component: <Dashboard />,
     authenticate: {
       mustLogin: true
     }

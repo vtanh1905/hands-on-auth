@@ -56,52 +56,6 @@ paths:
                 $ref: '#/components/schemas/LoginResponse'
         '400':
           description: Bad Request
-  /api/video:
-    get:
-      tags:
-        - video
-      parameters:
-        - in: query
-          name: limit
-          schema:
-            type: integer
-        - in: query
-          name: offset
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetVideoResponse'
-        '400':
-          description: Bad Request
-    post:
-      security:
-        - bearerAuth: []
-      tags:
-        - video
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                url:
-                  type: string
-                  example: https://www.youtube.com/watch?v=videoId
-        required: true
-      responses:
-        '200':
-          description: Successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostVideoResponse'
-        '400':
-          description: Bad Request
 components:
   schemas:
     AccountEntity:
@@ -142,31 +96,6 @@ components:
           properties:
             token:
               type: string
-    VideoEntity:
-      type: object
-      properties:
-        id:
-          type: string
-        description:
-          type: string
-        email:
-          type: string
-    GetVideoResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Get Video Successfully
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/VideoEntity'
-    PostVideoResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Share Video Successfully
   securitySchemes:
     bearerAuth:
       type: http

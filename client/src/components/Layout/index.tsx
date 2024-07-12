@@ -37,7 +37,7 @@ const Layout = (props: LayoutProps) => {
         <div className='header-content'>
           <Link to='/'>
             <h1 className='header-text-logo'>
-              <HomeOutlined /> Funny Movies
+              <HomeOutlined /> Hands On Auth
             </h1>
           </Link>
           {!user ? (
@@ -51,8 +51,8 @@ const Layout = (props: LayoutProps) => {
                 <span>
                   Welcome <b>{user.email}</b>
                 </span>
-                <Button type='primary' onClick={() => navigate('/share-video')}>
-                  Share Video
+                <Button type='primary' onClick={() => navigate('/dashboard')}>
+                  Dashboard
                 </Button>
                 <Button type='primary' danger onClick={onLogout}>
                   Logout

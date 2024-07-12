@@ -1,5 +1,5 @@
 import { checkSchema } from 'express-validator'
-import { checkSchemaErrorMiddleware } from './checkSchemaError'
+import { checkSchemaErrorMiddleware } from '../../../utils/checkSchemaError'
 
 export const accountValidator: any = [
   checkSchema({

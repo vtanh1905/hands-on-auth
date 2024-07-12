@@ -5,13 +5,12 @@ import { FormInstance, notification } from 'antd'
 
 import routes from './routes'
 import { Layout, Authenticate } from './components'
-import { UserStore, VideoStore } from './stores'
-import { cookies, websocket } from './utils'
+import { UserStore } from './stores'
+import { cookies } from './utils'
 import { getAccountInfoApi, loginApi } from './apis'
 
 const App = () => {
   const [user, setUser] = useContext(UserStore)
-  const [, setVideos] = useContext(VideoStore)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -34,29 +33,6 @@ const App = () => {
       setLoading(false)
     }
   }, [])
-
-  useEffect(() => {
-    //Listen Websocket For New Video
-    if (user) {
-      websocket.on('message', (data) => {
-        if (user.email !== data.email) {
-          setVideos((preState: any) => {
-            const clone: any[] = JSON.parse(JSON.stringify(preState))
-            clone.unshift(data)
-            return clone
-          })
-          notification.info({
-            message: data.title,
-            description: `Shared by ${data.email}`,
-            placement: 'bottomRight'
-          })
-        }
-      })
-    }
-    return () => {
-      websocket.removeListener('message')
-    }
-  }, [user])
 
   const onLogin = async (values: any, form: FormInstance) => {
     const { email, password } = values

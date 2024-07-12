@@ -7,44 +7,45 @@ import * as bodyParser from 'body-parser'
 import cors from 'cors'
 import path from 'path'
 
-import { accountController, videoController } from './controllers'
+import { accountController } from './controllers'
 import { errorHandlerMiddleware } from './middlewares'
-import { webSocketListen } from './utils'
 
 // Read Environment variable from .env file
 dotenv.config({ path: `${__dirname}/../../.env` })
 
-const swaggerDocument = YAML.parse(fs.readFileSync(`${__dirname}/../swagger/openapi.yaml`, 'utf8'))
+function bootstrap() {
+  const app: Express = express()
+  const port = process.env.PORT
 
-const app: Express = express()
-const port = process.env.PORT
+  //  Config CORS
+  app.use(bodyParser.json())
+  app.use(
+    cors({
+      origin: process.env.ACCESS_CONTROL_ALLOW_ORIGIN
+    })
+  )
 
-app.use(bodyParser.json())
-app.use(
-  cors({
-    origin: process.env.ACCESS_CONTROL_ALLOW_ORIGIN
+  // Setup Swagger
+  const swaggerDocument = YAML.parse(fs.readFileSync(`${__dirname}/../swagger/openapi.yaml`, 'utf8'))
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
+  // Import API Controllers
+  app.use('/api/account', accountController)
+
+  // Host React Application
+  app.use(express.static(path.resolve(__dirname, '../../client/build')))
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'))
   })
-)
 
-// Setup Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+  // Error Handler
+  app.use(errorHandlerMiddleware)
 
-// Import API Controllers
-app.use('/api/account', accountController)
-app.use('/api/video', videoController)
+  const server = app.listen(port, () => {
+    console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
+  })
 
-// Host React Application
-app.use(express.static(path.resolve(__dirname, '../../client/build')))
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'))
-})
+  return server;
+}
 
-// Error Handler
-app.use(errorHandlerMiddleware)
-
-const server = app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
-})
-
-// Bootstrap Websocket
-webSocketListen(server)
+bootstrap();

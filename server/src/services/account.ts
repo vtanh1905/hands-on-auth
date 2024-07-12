@@ -2,7 +2,7 @@ import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
 
 import { DBConnection } from '../utils'
-import { CustomError } from '../common'
+import { HttpStatusException } from '../common/exceptions'
 
 export class AccountService {
   static #instance: AccountService
@@ -23,7 +23,7 @@ export class AccountService {
 
       // Validate Account does not exist
       if (result.rowCount === 0) {
-        throw new CustomError(400, { message: 'Email does not exist' })
+        throw new HttpStatusException(400, { message: 'Email does not exist' })
       }
 
       return result.rows[0]
@@ -45,7 +45,7 @@ export class AccountService {
 
       // Validator Email exists
       if (result.rowCount === 0) {
-        throw new CustomError(400, { message: 'Email exists' })
+        throw new HttpStatusException(400, { message: 'Email exists' })
       }
     } catch (error) {
       throw error
@@ -59,7 +59,7 @@ export class AccountService {
       ])
 
       if (result.rows.length === 0 || !bcrypt.compareSync(password, result.rows[0].password)) {
-        throw new CustomError(400, { message: 'Email does not exist or Password is not correct' })
+        throw new HttpStatusException(400, { message: 'Email does not exist or Password is not correct' })
       }
 
       return jwt.sign(

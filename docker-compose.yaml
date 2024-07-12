@@ -14,24 +14,24 @@ services:
     - ./server/sql/seeds.sql:/docker-entrypoint-initdb.d/seeds.sql
     networks:
       - my_network
-  app:
-    container_name: hands-on-auth
-    build: .
-    environment:
-      NODE_ENV: ${NODE_ENV}
-      PORT: ${PORT}
-      DATABASE_URL: postgresql://postgres:123456@postgres:5432/postgres
-      JWT_KEY: ${JWT_KEY}
-      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
-      ACCESS_CONTROL_ALLOW_ORIGIN: ${ACCESS_CONTROL_ALLOW_ORIGIN}
-      API_URL: ${API_URL}
-      WEBSOCKET_URL: ${WEBSOCKET_URL}
-    ports:
-      - 3000:3000
-    networks:
-      - my_network
-    depends_on:
-      - postgres
+  # app:
+  #   container_name: hands-on-auth
+  #   build: .
+  #   environment:
+  #     NODE_ENV: ${NODE_ENV}
+  #     PORT: ${PORT}
+  #     DATABASE_URL: postgresql://postgres:123456@postgres:5432/postgres
+  #     JWT_KEY: ${JWT_KEY}
+  #     GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+  #     ACCESS_CONTROL_ALLOW_ORIGIN: ${ACCESS_CONTROL_ALLOW_ORIGIN}
+  #     API_URL: ${API_URL}
+  #     WEBSOCKET_URL: ${WEBSOCKET_URL}
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - my_network
+  #   depends_on:
+  #     - postgres
 networks:
   my_network:
     driver: bridge
