@@ -1,0 +1,16 @@
+.registry-page {
+  display: flex;
+  justify-content: center;
+
+  .registry-form {
+    width: 20vw;
+
+    @media (min-width: 1025px) and (max-width: 1440px) {
+      width: 40vw;
+    }
+  
+    @media (max-width: 1024px) {
+      width: 60vw;
+    }
+  }
+}

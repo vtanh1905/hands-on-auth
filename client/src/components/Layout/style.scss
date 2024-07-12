@@ -1,0 +1,41 @@
+.layout {
+  min-height: 100vh;
+
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+
+      .header-text-logo {
+        color: #ffffff;
+        font-weight: 900;
+        font-size: 2vw;
+        margin: 0;
+      }
+
+      .login-form {
+        display: inline-flex;
+        margin-top: 16px;
+      }
+
+      .user-info {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .content {
+    padding: 25px 0;
+  }
+}
+
+.loading-container {
+  min-height: 100vh;
+  line-height: 100vh;
+  text-align: center;
+}

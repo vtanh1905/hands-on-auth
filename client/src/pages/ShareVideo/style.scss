@@ -1,0 +1,16 @@
+.share-video-page {
+  display: flex;
+  justify-content: center;
+
+  .share-video-form {
+    width: 30vw;
+
+    @media (min-width: 1025px) and (max-width: 1440px) {
+      width: 50vw;
+    }
+  
+    @media (max-width: 1024px) {
+      width: 70vw;
+    }
+  }
+}
