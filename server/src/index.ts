@@ -7,8 +7,8 @@ import * as bodyParser from 'body-parser'
 import cors from 'cors'
 import path from 'path'
 
-import { accountController } from './controllers'
 import { errorHandlerMiddleware } from './middlewares'
+import { Routers } from './controllers/routers'
 
 // Read Environment variable from .env file
 dotenv.config({ path: `${__dirname}/../../.env` })
@@ -29,8 +29,8 @@ function bootstrap() {
   const swaggerDocument = YAML.parse(fs.readFileSync(`${__dirname}/../swagger/openapi.yaml`, 'utf8'))
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-  // Import API Controllers
-  app.use('/api/account', accountController)
+  // Import API Router
+  app.use('/api', Routers.initialize())
 
   // Host React Application
   app.use(express.static(path.resolve(__dirname, '../../client/build')))
