@@ -7,7 +7,7 @@ import routes from './routes'
 import { Layout, Authenticate } from './components'
 import { UserStore } from './stores'
 import { cookies } from './utils'
-import { getAccountInfoApi, loginApi } from './apis'
+import { getUsersInfoApi, loginApi } from './apis'
 
 const App = () => {
   const [user, setUser] = useContext(UserStore)
@@ -17,7 +17,7 @@ const App = () => {
     // Re-login if token exists in cookie
     const token = cookies.get('token')
     if (token) {
-      getAccountInfoApi(token)
+      getUsersInfoApi(token)
         .then((result) => {
           setUser(result.data)
         })

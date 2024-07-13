@@ -1,7 +1,7 @@
 import { checkSchema } from 'express-validator'
 import { checkSchemaErrorMiddleware } from '../../../utils/checkSchemaError'
 
-export const accountValidator: any = [
+export const usersValidator: any = [
   checkSchema({
     email: {
       in: ['body'],

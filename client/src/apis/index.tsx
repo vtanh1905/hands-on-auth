@@ -1,7 +1,7 @@
 import { axiosInstance } from './axios'
 
 export const loginApi = async (email: string, password: string) => {
-  const { data } = await axiosInstance().post('/account/login', {
+  const { data } = await axiosInstance().post('/users/login', {
     email,
     password
   })
@@ -9,15 +9,15 @@ export const loginApi = async (email: string, password: string) => {
 }
 
 export const registryApi = async (email: string, password: string) => {
-  const { data } = await axiosInstance().post('/account/registry', {
+  const { data } = await axiosInstance().post('/users/registry', {
     email,
     password
   })
   return data
 }
 
-export const getAccountInfoApi = async (token: string) => {
-  const { data } = await axiosInstance().post('/account/info', {
+export const getUsersInfoApi = async (token: string) => {
+  const { data } = await axiosInstance().post('/users/info', {
     token
   })
   return data

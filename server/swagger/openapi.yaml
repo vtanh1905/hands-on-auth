@@ -3,30 +3,30 @@ info:
   title: Youtube Video Sharing API
   version: 0.0.1
 paths:
-  /api/account/info:
+  /api/users/info:
       post:
         security:
           - bearerAuth: []
         tags:
-          - account
+          - users
         responses:
           '200':
             description: Successful
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/AccountInfoResponse'
+                  $ref: '#/components/schemas/UsersInfoResponse'
           '400':
             description: Bad Request
-  /api/account/registry:
+  /api/users/registry:
     post:
       tags:
-        - account
+        - users
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountRequestBody'
+              $ref: '#/components/schemas/UsersRequestBody'
         required: true
       responses:
         '200':
@@ -37,15 +37,15 @@ paths:
                 $ref: '#/components/schemas/RegisterResponse'
         '400':
           description: Bad Request
-  /api/account/login:
+  /api/users/login:
     post:
       tags:
-        - account
+        - users
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountRequestBody'
+              $ref: '#/components/schemas/UsersRequestBody'
         required: true
       responses:
         '200':
@@ -58,20 +58,20 @@ paths:
           description: Bad Request
 components:
   schemas:
-    AccountEntity:
+    UsersEntity:
       type: object
       properties:
         email:
           type: string
-    AccountInfoResponse:
+    UsersInfoResponse:
       type: object
       properties:
         message:
           type: string
           example: Get Info Successfully
         data:
-          $ref: '#/components/schemas/AccountEntity'
-    AccountRequestBody:
+          $ref: '#/components/schemas/UsersEntity'
+    UsersRequestBody:
       type: object
       properties:
         email:

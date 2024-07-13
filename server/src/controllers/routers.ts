@@ -1,13 +1,13 @@
 import { Router } from "express"
 
-import accountController from "./accounts/accounts"
+import usersController from "./users/users"
 
 export class Routers {
-    static initialize(): Router {
-        const router: Router = Router()
-        // Account
-        router.use('/account', accountController)
-        // Return the output
-        return router;
-    }
+  static initialize(): Router {
+    const router: Router = Router()
+    // Users
+    router.use('/users', usersController)
+    // Return the output
+    return router;
+  }
 }

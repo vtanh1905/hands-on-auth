@@ -1,4 +1,4 @@
-INSERT INTO app.account (email, password)
+INSERT INTO app.users (email, password)
 VALUES ('admin@gmail.com', '$2a$10$B611Yqt1S51oLa/8Wrlkselj8JtA7w/67nBO/6JcyRb6OtF13poBK');
 
 INSERT INTO app.video
