@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node build/index.js",
     "build": "npx tsc",
-    "test": "jest --detectOpenHandles",
-    "database:init": "node sql/index.js"
+    "test": "jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "vtanh1905@gmail.com",
